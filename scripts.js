@@ -11,7 +11,7 @@ function createGameBoard(){
     let gameboardPlace = document.getElementsByTagName('td')
         
         for(let i=0; i<gameboardPlace.length;i++){
-        let button = documnet.createElement('button');
+        let button = document.createElement('button');
     button.innerHTML= "[ ]";
     
     gameboardPlace.appendChild(button);
