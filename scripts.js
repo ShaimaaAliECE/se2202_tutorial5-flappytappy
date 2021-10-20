@@ -11,10 +11,10 @@ function createGameBoard(){
     let gameboardPlace = document.getElementsByTagName('td')
         
         for(let i=0; i<gameboardPlace.length;i++){
-        let button = document.createElement('button');
-    button.innerHTML= "[ ]";
+        let btn = document.createElement('button');
+    btn.innerHTML= "[ ]";
     
-    gameboardPlace.appendChild(button);
+    gameboardPlace.appendChild(btn);
     }  
 }
     
@@ -52,7 +52,7 @@ function takeCell(event)
     // Check if the game is over
     if (isGameOver()){
         let h1 = document.createElement("h1");
-        let textNode = document.createTextNide("Game Over!")
+        let textNode = document.createTextNode("Game Over!")
         h1.appendChild(textNode);
         let gameOverLabel = document.getElementById('game-over-lbl');
         gameOverLabel.appendChild(h1);
