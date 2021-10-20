@@ -1,21 +1,21 @@
 let nextPlayer = 'X'; // takes a value of either 'X' or 'O' according to the game turns
-
+let nextPlayerLabel = document.getElementById('next-lbl');
+nextPlayerLabel.innerText = " "+ nextPlayer;
 //initialize the game
-document.getElementByID("next-lbl").innerHTML = nextPlayer;
 // use the value stored in the nextPlayer variable to indicate who the next player is
 
 
 //This call will create the buttons needed for the gameboard.
 createGameBoard()
-
-function createGameBoard()
-{
-    for(let gameboardPlace of document.getElementsByTagName("td")){
-        let button = documnet.createElement("button");
+function createGameBoard(){
+    let gameboardPlace = document.getElementsByTagName('td')
+        
+        for(let i=0; i<gameboardPlace.length;i++){
+        let button = documnet.createElement('button');
     button.innerHTML= "[ ]";
-    button.type = "button";
-    document.getElementById(gameboardPlace.id).appendChild(button);
-}
+    
+    gameboardPlace.appendChild(button);
+    }  
 }
     
     
@@ -36,14 +36,13 @@ for (let i=0; i<btns.length; i++)
 function takeCell(event)
 {
     
-    let btn = event.target;
-    btn.innerHTML = nextPLayer;
-    if(nextPlayer == 'X'){
-        nextPlayer = '0';
-    }else if (nextPlayer == '0'){
-        nextPlayer = 'X';
-    }
-    document.getElementById("next-lbl").innerHTML = nextPlayer;
+   event.target.innerText ="[" + nextPlayer + "]";
+    event.target.disabled = true;
+    if (nextPlayer == 'X') nextPlayer ='0';
+    else nextPlayer = 'X';
+    nextPlaterLabel.innerText = " " + nextPlayer;
+   
+    
     /*
         When the button is clicked, the space inside its square brackets is replaced by the value in the nextPlayer before switching it
     */
@@ -51,27 +50,28 @@ function takeCell(event)
     // Make sure the button is clickable only once (I didn't mention how to do that, look it up :) )
     btn.disabled = true;
     // Check if the game is over
-    if (isGameOver())
-    {
-        // let the lable with the id 'game-over-lbl' display the words 'Game Over' inside <h1> element
-   let gameOverHeader = document.createElement("h1");
-        gameOverHeader.innerHTML = "Game Over";
-        document.getElementId('game-over-lbl').appendChild(gameOverHeader);
+    if (isGameOver()){
+        let h1 = document.createElement("h1");
+        let textNode = document.createTextNide("Game Over!")
+        h1.appendChild(textNode);
+        let gameOverLabel = document.getElementById('game-over-lbl');
+        gameOverLabel.appendChild(h1);
     }
+}
+        // let the lable with the id 'game-over-lbl' display the words 'Game Over' inside <h1> element
+  
 
     // I'll leave declaring the winner for your intrinsic motivation, it's not required for this assignment 
-}
 
 function isGameOver()
 {
-    let btns = document.querySelectorAll('button');
-    let counter =0;
-    for(let i=0; i<btns.length;i++)
-    {
-        if(btns[i].disabled == true)
-            counter++;
+    let disabled =0;
+    for(let i=0; i<btns.length;i++){
+        if(btns[i].disabled){
+            disabled++;
     }
-    if (counter == btns.length){
+    }
+    if (disabled ==9){
         return true;
     }
     return false;
